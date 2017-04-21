@@ -32,4 +32,4 @@ toHTML ckb =
 
         fld = { field | controls = [ctl] }
     in
-        B_Field.toHTML fld 
+        B_Field.toHTML fld

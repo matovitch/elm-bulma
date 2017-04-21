@@ -4,6 +4,7 @@ type Size =
     Small  |
     Medium |
     Large  |
+    Normal |
     Default
 
 toString : Size -> String
@@ -12,4 +13,5 @@ toString size =
         Small   -> "is-small"
         Medium  -> "is-medium"
         Large   -> "is-large"
-        Default -> "is-normal"
+        Normal  -> "is-normal"
+        Default -> ""

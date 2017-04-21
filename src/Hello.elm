@@ -12,6 +12,7 @@ import Bulma.Button   as B_Button   exposing (button)
 import Bulma.Delete   as B_Delete   exposing (delete)
 import Bulma.Select   as B_Select   exposing (select)
 import Bulma.Input    as B_Input    exposing (input)
+import Bulma.Radio    as B_Radio    exposing (radio)
 import Bulma.Help     as B_Help     exposing (help)
 import Bulma.Icon     as B_Icon     exposing (icon)
 import Bulma.Tabs     as B_Tabs     exposing (tabs)
@@ -43,7 +44,7 @@ main =
                                 content = [ H.p [] [H.text "Send"] ] }
 
         someContent = 
-            B_Content.Content []
+            B_Content.Content B_M_Size.Small []
                 [
                     H.h1 [] [ H.text "Some Content..." ],
                     H.p []
@@ -96,6 +97,13 @@ main =
 
         aDelete = { delete | size = B_M_Size.Large }
 
+
+        aRadio  = { radio | label = "Yes or No ?", 
+                            name = "YorN",
+                            isHorizontal = True,
+                            contents =  [ [ H.text " Yes" ], 
+                                          [ H.text " No" ] ] }
+
         aSection = 
             B_Section.Section []
                 [
@@ -103,6 +111,7 @@ main =
                     B_Input.toHTML    anInput,
                     B_Select.toHTML   aSelect,
                     B_Checkbox.toHTML aCheckbox,
+                    B_Radio.toHTML    aRadio,
                     B_Delete.toHTML   aDelete
                 ]
 

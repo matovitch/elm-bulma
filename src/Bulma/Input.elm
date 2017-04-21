@@ -34,7 +34,7 @@ input =
     {
         state        = B_M_State.Default,
         color        = B_M_Color.Default,
-        size         = B_M_Size.Default,
+        size         = B_M_Size.Normal,
         iconLeft     = Maybe.Nothing,
         iconRight    = Maybe.Nothing,
         label        = "",

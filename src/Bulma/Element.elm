@@ -30,7 +30,6 @@ toString element =
         Content      -> "content"
         Delete       -> "delete "
         Control      -> "control"
-        Field        -> "field"
         Label        -> "label"
         Input        -> "input"
         Textarea     -> "textarea"

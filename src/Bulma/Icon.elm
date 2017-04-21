@@ -15,8 +15,7 @@ type alias Icon msg =
         name       : String,
         size       : B_M_Size.Size,
         modifier   : B_M_Icon.Icon,
-        attributes : List (H.Attribute msg),
-        content    : List (H.Html msg)
+        attributes : List (H.Attribute msg)
     }
 
 icon : Icon msg
@@ -25,8 +24,7 @@ icon =
         name       = "",
         size       = B_M_Size.Default,
         modifier   = B_M_Icon.Default,
-        attributes = [],
-        content    = []
+        attributes = []
     }
 
 toHTML : Icon msg -> H.Html msg
@@ -44,5 +42,5 @@ toHTML icn =
         [ 
             H.i 
                 [ HA.class ("fa fa-" ++ icn.name) ]
-                icn.content  
+                []  
         ]

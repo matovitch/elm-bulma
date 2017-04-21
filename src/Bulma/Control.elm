@@ -54,7 +54,7 @@ elementToHTMLs element =
         Checkbox checkbox -> [ B_F_Checkbox.toHTML checkbox ]
         Select   select   -> [ B_F_Select.toHTML   select   ]
         Input    input    -> [ B_F_Input.toHTML    input    ]
-        Radio    radio    -> [ B_F_Radio.toHTML    radio    ]
+        Radio    radio    ->   B_F_Radio.toHTML    radio
         DefaultElement    -> []
 
 modifierToHAs : B_M_Control.Control -> Bool -> List (H.Attribute msg)
