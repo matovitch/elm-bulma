@@ -82,9 +82,10 @@ main =
                           content = [ H.p [] [H.text "Is it helping ?"] ] }
 
         anInput = { input | color      = B_M_Color.Success,
+                            size       = B_M_Size.Default,
                             label      = "Email",
                             iconLeft   = Maybe.Just envelopeIcon,
-                            help       = Maybe.Just anHelp,
+                            help       = Maybe.Nothing,
                             attributes = [ HA.placeholder "email" ] }
 
         aSelect = { select | size       = B_M_Size.Large,

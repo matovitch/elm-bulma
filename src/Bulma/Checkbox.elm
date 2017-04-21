@@ -3,7 +3,8 @@ module Bulma.Checkbox exposing (..)
 import Html            as H
 import Html.Attributes as HA
 
-import Bulma.Element as B_Element
+import Bulma.Control as B_Control exposing (control)
+import Bulma.Field   as B_Field   exposing (field)
 
 type alias Checkbox msg = 
     {
@@ -20,28 +21,15 @@ checkbox =
 
 toHTML : Checkbox msg -> H.Html msg
 toHTML ckb =
-    H.div
-        [ HA.class (B_Element.toString B_Element.Field  ) ]
-        [
-            H.p
-                [ 
-                    HA.class (B_Element.toString B_Element.Control)
-                ]
-                [
-                    H.label
-                        [ HA.class (B_Element.toString B_Element.Checkbox) ] 
-                        (
-                            [
-                                H.input
-                                    (
-                                        [ HA.type_ (B_Element.toString B_Element.Checkbox) ]
-                                        ++
-                                        ckb.attributes
-                                    )
-                                    []
-                            ] 
-                            ++
-                            ckb.content
-                        )
-                ]
-        ]
+    let
+        fCkb =
+            {
+                attributes   = ckb.attributes,
+                content      = ckb.content
+            }
+        
+        ctl = { control | element = B_Control.Checkbox fCkb }
+
+        fld = { field | controls = [ctl] }
+    in
+        B_Field.toHTML fld 

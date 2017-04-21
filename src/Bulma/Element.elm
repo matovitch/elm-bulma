@@ -6,7 +6,6 @@ type Element =
     Content      |
     Delete       |
     Control      |
-    Field        |
     Label        |
     Input        |
     Textarea     |

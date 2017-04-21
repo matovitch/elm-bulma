@@ -12,4 +12,4 @@ toString size =
         Small   -> "is-small"
         Medium  -> "is-medium"
         Large   -> "is-large"
-        Default -> ""
+        Default -> "is-normal"

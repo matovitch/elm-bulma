@@ -1,11 +1,13 @@
 module Bulma.Modifier.Control exposing (..)
 
 type Control =
-    IconLeft |
-    IconRight
+    IconsLeft  |
+    IconsRight |
+    Expanded
 
 toString : Control -> String
 toString control =
     case control of
-        IconLeft  -> "has-icons-left"
-        IconRight -> "has-icons-right"
+        IconsLeft  -> "has-icons-left"
+        IconsRight -> "has-icons-right"
+        Expanded   -> "is-expanded"
