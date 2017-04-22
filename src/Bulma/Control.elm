@@ -69,25 +69,22 @@ maybeIconToHTMLs maybeIcon modif =
 
 toHTML : Control msg -> H.Html msg
 toHTML ctl =
-    let
-        toHAIfEnabled = B_Utils.mapIfEnabled B_M_Control.toHA
-    in
-        H.p
-            (
-                [ HA.class (B_Element.toString B_Element.Control) ]
-                ++
-                ( toHAIfEnabled (B_Utils.isJust ctl.iconLeft ) B_M_Control.IconsLeft )
-                ++
-                ( toHAIfEnabled (B_Utils.isJust ctl.iconRight) B_M_Control.IconsRight)
-                ++
-                ( toHAIfEnabled ctl.isExpanded B_M_Control.Expanded )
-                ++
-                ctl.attributes
-            )
-            ( 
-                [ elementToHTML ctl.element]
-                ++
-                (maybeIconToHTMLs ctl.iconLeft B_M_Icon.Left)
-                ++
-                (maybeIconToHTMLs ctl.iconRight B_M_Icon.Right)
-            )
+    H.p
+        (
+            [ HA.class (B_Element.toString B_Element.Control) ]
+            ++
+            ( B_M_Control.isXtoHAs (B_Utils.isJust ctl.iconLeft ) B_M_Control.IconsLeft )
+            ++
+            ( B_M_Control.isXtoHAs (B_Utils.isJust ctl.iconRight) B_M_Control.IconsRight)
+            ++
+            ( B_M_Control.isXtoHAs ctl.isExpanded B_M_Control.Expanded )
+            ++
+            ctl.attributes
+        )
+        ( 
+            [ elementToHTML ctl.element]
+            ++
+            (maybeIconToHTMLs ctl.iconLeft B_M_Icon.Left)
+            ++
+            (maybeIconToHTMLs ctl.iconRight B_M_Icon.Right)
+        )

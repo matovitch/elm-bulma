@@ -25,8 +25,8 @@ toHTML dlt =
     H.a
         (
             [
-                HA.class (B_Element.toString B_Element.Delete),
-                HA.class (B_M_Size.toString dlt.size)
+                B_Element.toHA B_Element.Delete,
+                B_M_Size.toHA dlt.size
             ] 
             ++
             dlt.attributes

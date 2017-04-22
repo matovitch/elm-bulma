@@ -52,24 +52,26 @@ main =
         envelopeIcon = { icon | name = "envelope" }
         trashIcon    = { icon | name = "trash" }
 
-        sendTabsItem = { tabsItem | content   = [ H.a [] [H.text "Send"] ],
+        sendTabsItem = { tabsItem | name   = "Send",
+                                    icon      = Maybe.Just envelopeIcon,
                                     isActive  = True }
 
-        cancelTabsItem = { tabsItem | content  = [ H.a [] [H.text "Cancel"] ] }
+        cancelTabsItem = { tabsItem | name  = "Cancel" }
 
         topTabs = { tabs | items     = [ sendTabsItem, cancelTabsItem ],
-                           modifiers = [ B_M_Tabs.Centered, B_M_Tabs.Boxed ] }
+                           modifiers = [ B_M_Tabs.Centered ],
+                           size      = B_M_Size.Large }
 
-        sendButton = { button | color   = B_M_Color.Info,
-                                size    = B_M_Size.Medium,
-                                icon    = Maybe.Just envelopeIcon,
-                                message = Maybe.Just ButtonSend,
-                                content = [ H.p [] [H.text "Send"] ] }
+        sendButton = { button | color      = B_M_Color.Info,
+                                size       = B_M_Size.Medium,
+                                icon       = Maybe.Just envelopeIcon,
+                                attributes = [ HE.onClick ButtonSend ],
+                                content    = [ H.p [] [H.text "Send"] ] }
 
-        cancelButton = { button | color   = B_M_Color.Light,
+        cancelButton = { button | states  = [ B_M_State.Disabled ],
                                   size    = B_M_Size.Medium,
                                   icon    = Maybe.Just trashIcon,
-                                  message = Maybe.Just ButtonCancel,
+                                  attributes = [ HE.onClick ButtonCancel ],
                                   content = [ H.p [] [H.text "Cancel"] ] }
 
         someContent = 
@@ -120,8 +122,8 @@ main =
         anInput = { input | label      = "Email",
                             iconLeft   = Maybe.Just envelopeIcon,
                             help       = Maybe.Just anHelp,
-                            message    = Maybe.Just InputEmail,
-                            attributes = [ HA.placeholder "email" ] }
+                            attributes = [ HE.onInput InputEmail,
+                                           HA.placeholder "email" ] }
 
         aSelect = { select | size    = B_M_Size.Large,
                              label   = "CS Master",
@@ -130,7 +132,7 @@ main =
                                                       ("Turing" , SelectCSMaster Turing)] }
 
         aCheckbox = { checkbox | content = ([ H.text " A simple " ] ++ [H.a [] [H.text "checkbox..."]]), 
-                                 message = Maybe.Just Checkbox }
+                                 attributes = [ HE.onClick Checkbox ] }
 
         aDelete = { delete | size = B_M_Size.Large }
 

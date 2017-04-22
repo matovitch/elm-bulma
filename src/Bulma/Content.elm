@@ -26,9 +26,10 @@ toHTML : Content msg -> H.Html msg
 toHTML ctn =
     H.div
         (
-            [ HA.class (B_Element.toString B_Element.Content) ]
-            ++
-            [ HA.class (B_M_Size.toString ctn.size) ]
+            [ 
+                B_Element.toHA B_Element.Content,
+                B_M_Size.toHA ctn.size 
+            ]
             ++
             ctn.attributes
         )

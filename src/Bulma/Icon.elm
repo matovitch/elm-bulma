@@ -8,6 +8,8 @@ import Bulma.Element as B_Element
 import Bulma.Modifier.Size  as B_M_Size
 import Bulma.Modifier.Icon  as B_M_Icon
 
+import Bulma.Utils as B_Utils
+
 import String exposing (isEmpty)
 
 type alias Icon msg = 
@@ -44,3 +46,6 @@ toHTML icn =
                 [ HA.class ("fa fa-" ++ icn.name) ]
                 []  
         ]
+
+maybeToHTMLs : Maybe (Icon msg) -> List (H.Html msg)
+maybeToHTMLs = B_Utils.maybeToList >> List.map toHTML

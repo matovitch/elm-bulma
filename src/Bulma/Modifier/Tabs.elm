@@ -1,5 +1,8 @@
 module Bulma.Modifier.Tabs exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Tabs =
     Centered |
     Toggle   |
@@ -13,3 +16,6 @@ toString textArea =
         Toggle   -> "is-toggle"
         Boxed    -> "is-boxed" 
         Right    -> "is-right"
+
+toHA : Tabs -> H.Attribute msg
+toHA = HA.class << toString

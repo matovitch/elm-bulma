@@ -17,7 +17,6 @@ type alias Button msg =
         size       : B_M_Size.Size,
         states     : List B_M_State.State,
         icon       : Maybe (B_Icon.Icon msg),
-        message    : Maybe msg,
         attributes : List (H.Attribute msg),
         content    : List (H.Html msg)
     }
@@ -29,7 +28,6 @@ button =
         size       = B_M_Size.Default,
         states     = [],
         icon       = Maybe.Nothing,
-        message    = Maybe.Nothing,
         attributes = [],
         content    = []
     }

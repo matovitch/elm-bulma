@@ -10,14 +10,12 @@ import Bulma.Modifier.State   as B_M_State
 import Bulma.Modifier.Icon    as B_M_Icon
 import Bulma.Modifier.Size    as B_M_Size
 
-import Maybe
 
 type alias Input msg = 
     {
         state      : B_M_State.State,
         color      : B_M_Color.Color,
         size       : B_M_Size.Size,
-        message    : Maybe (String -> msg),
         attributes : List (H.Attribute msg)
     }
 
@@ -27,18 +25,11 @@ input =
         state      = B_M_State.Default,
         color      = B_M_Color.Default,
         size       = B_M_Size.Default,
-        message    = Maybe.Nothing,
         attributes = []
     }
 
 toHTML : Input msg -> H.Html msg
 toHTML inp =
-    let
-        onInput =
-            case inp.message of
-                Just message -> [ HE.onInput message ]
-                Nothing      -> []
-    in
     H.input
         (
             [
@@ -49,7 +40,5 @@ toHTML inp =
             ]
             ++
             inp.attributes
-            ++
-            onInput
         )
         []

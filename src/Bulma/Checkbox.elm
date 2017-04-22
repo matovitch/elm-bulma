@@ -10,7 +10,6 @@ import Maybe
 
 type alias Checkbox msg = 
     {
-        message    : Maybe msg,
         attributes : List (H.Attribute msg),
         content    : List (H.Html msg)
     }
@@ -18,7 +17,6 @@ type alias Checkbox msg =
 checkbox : Checkbox msg
 checkbox = 
     {
-        message      = Maybe.Nothing,
         attributes   = [],
         content      = []
     }

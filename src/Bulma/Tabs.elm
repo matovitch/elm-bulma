@@ -19,8 +19,7 @@ type alias Tabs msg =
         modifiers    : List B_M_Tabs.Tabs,
         isFullwidth  : Bool,
         items        : List (B_TabsItem.TabsItem msg),
-        attributes   : List (H.Attribute         msg),
-        content      : List (H.Html              msg)
+        attributes   : List (H.Attribute         msg)
     }
 
 tabs : Tabs msg
@@ -30,8 +29,7 @@ tabs =
         modifiers    = [],
         isFullwidth  = False,
         items        = [],
-        attributes   = [],
-        content      = []
+        attributes   = []
     }
 
 toHTML : Tabs msg -> H.Html msg
@@ -43,13 +41,18 @@ toHTML tbs =
             else
                 []
     in
-    H.div
-        (
-            [ HA.class (B_C_Tabs.toString B_C_Tabs.Root) ]             ++
-            ( List.map (HA.class << B_M_Tabs.toString) tbs.modifiers ) ++
-            isFullwidth                                                ++
-            tbs.attributes
-        )
-        [
-            H.ul [] (List.map B_TabsItem.toHTML tbs.items)
-        ]
+        H.div
+            (
+                [ B_C_Tabs.toHA B_C_Tabs.Root ]
+                ++
+                [ B_M_Size.toHA tbs.size ]
+                ++
+                ( List.map B_M_Tabs.toHA tbs.modifiers ) 
+                ++
+                isFullwidth
+                ++
+                tbs.attributes
+            )
+            [
+                H.ul [] (List.map B_TabsItem.toHTML tbs.items)
+            ]

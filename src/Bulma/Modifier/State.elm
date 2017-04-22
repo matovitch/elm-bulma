@@ -3,6 +3,8 @@ module Bulma.Modifier.State exposing (..)
 import Html            as H
 import Html.Attributes as HA
 
+import Bulma.Utils as B_Utils
+
 type State =
     Outlined |
     Loading  |
@@ -29,3 +31,9 @@ toHA state =
     case state of
         Disabled -> HA.disabled True
         _        -> HA.class (toString state)
+
+isXtoHAs : Bool -> State -> List (H.Attribute msg)
+isXtoHAs isX state = 
+    state |> B_Utils.doesExist isX
+          |> B_Utils.maybeToList
+          |> List.map toHA 
