@@ -1,5 +1,8 @@
 module Bulma.Modifier.Image exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Image =
     Is16x16   |
     Is24x24   |
@@ -29,3 +32,6 @@ toString image =
         Is3By2    -> "is-3By2"
         Is16By9   -> "is-16By9"
         Is2By1    -> "is-2By1"
+
+toHA : Image -> H.Attribute msg
+toHA = HA.class << toString

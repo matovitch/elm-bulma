@@ -20,11 +20,11 @@ import Bulma.Icon     as B_Icon     exposing (icon)
 import Bulma.Tabs     as B_Tabs     exposing (tabs)
 import Bulma.Box      as B_Box      exposing (box)
 
-import Bulma.Modifier.Tabs as B_M_Tabs 
 
 import Bulma.Modifier.Color as B_M_Color
 import Bulma.Modifier.State as B_M_State
 import Bulma.Modifier.Size  as B_M_Size
+import Bulma.Modifier.Tabs  as B_M_Tabs 
 
 import Maybe
 import Dict
@@ -52,11 +52,11 @@ main =
         envelopeIcon = { icon | name = "envelope" }
         trashIcon    = { icon | name = "trash" }
 
-        sendTabsItem = { tabsItem | name   = "Send",
-                                    icon      = Maybe.Just envelopeIcon,
-                                    isActive  = True }
+        sendTabsItem = { tabsItem | name     = "Send",
+                                    icon     = Maybe.Just envelopeIcon,
+                                    isActive = True }
 
-        cancelTabsItem = { tabsItem | name  = "Cancel" }
+        cancelTabsItem = { tabsItem | name = "Cancel" }
 
         topTabs = { tabs | items     = [ sendTabsItem, cancelTabsItem ],
                            modifiers = [ B_M_Tabs.Centered ],

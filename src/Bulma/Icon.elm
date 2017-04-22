@@ -10,8 +10,6 @@ import Bulma.Modifier.Icon  as B_M_Icon
 
 import Bulma.Utils as B_Utils
 
-import String exposing (isEmpty)
-
 type alias Icon msg = 
     {
         name       : String,
