@@ -5,9 +5,11 @@ import Html.Events     as HE
 import Html            as H
 
 import Bulma.TabsItem as B_TabsItem exposing (tabsItem)
+import Bulma.Textarea as B_Textarea exposing (textarea)
 import Bulma.Checkbox as B_Checkbox exposing (checkbox)
 import Bulma.Content  as B_Content  exposing (content)
 import Bulma.Section  as B_Section  exposing (section)
+import Bulma.Buttons  as B_Buttons  exposing (buttons)
 import Bulma.Button   as B_Button   exposing (button)
 import Bulma.Delete   as B_Delete   exposing (delete)
 import Bulma.Select   as B_Select   exposing (select)
@@ -39,12 +41,16 @@ type YesOrNo =
 type Message = 
     SelectCSMaster CSMaster |
     RadioYesOrNo YesOrNo    |
+    TextareaComment String  |
     InputEmail String       |
-    ButtonSend                    
+    ButtonCancel            |
+    ButtonSend              |
+    Checkbox       
 
 main =
     let
         envelopeIcon = { icon | name = "envelope" }
+        trashIcon    = { icon | name = "trash" }
 
         sendTabsItem = { tabsItem | content   = [ H.a [] [H.text "Send"] ],
                                     isActive  = True }
@@ -55,13 +61,19 @@ main =
                            modifiers = [ B_M_Tabs.Centered, B_M_Tabs.Boxed ] }
 
         sendButton = { button | color   = B_M_Color.Info,
-                                size    = B_M_Size.Large,
+                                size    = B_M_Size.Medium,
                                 icon    = Maybe.Just envelopeIcon,
                                 message = Maybe.Just ButtonSend,
                                 content = [ H.p [] [H.text "Send"] ] }
 
+        cancelButton = { button | color   = B_M_Color.Light,
+                                  size    = B_M_Size.Medium,
+                                  icon    = Maybe.Just trashIcon,
+                                  message = Maybe.Just ButtonCancel,
+                                  content = [ H.p [] [H.text "Cancel"] ] }
+
         someContent = 
-            B_Content.Content B_M_Size.Small []
+            B_Content.Content B_M_Size.Medium []
                 [
                     H.h1 [] [ H.text "Some Content..." ],
                     H.p []
@@ -94,7 +106,13 @@ main =
                         ]
                 ]
 
-        sendBox = { box | content = [ B_Content.toHTML someContent, B_Button.toHTML sendButton ] }
+        aComment = { textarea | label = "Comment",
+                                message    = Maybe.Just TextareaComment,
+                                attributes = [ HA.placeholder "Something to say ?" ] }
+
+        sendBox = { box | content = [ B_Content.toHTML someContent, 
+                                      B_Textarea.toHTML aComment, 
+                                      B_Buttons.toHTML [sendButton, cancelButton] ] }
 
         anHelp = { help | color   = B_M_Color.Success,
                           content = [ H.p [] [H.text "Is it helping ?"] ] }
@@ -111,7 +129,8 @@ main =
                                                       ("Church" , SelectCSMaster Church),
                                                       ("Turing" , SelectCSMaster Turing)] }
 
-        aCheckbox = { checkbox | content = ([ H.text " A simple " ] ++ [H.a [] [H.text "checkbox..."]]) }
+        aCheckbox = { checkbox | content = ([ H.text " A simple " ] ++ [H.a [] [H.text "checkbox..."]]), 
+                                 message = Maybe.Just Checkbox }
 
         aDelete = { delete | size = B_M_Size.Large }
 
@@ -132,8 +151,6 @@ main =
                     B_Radio.toHTML    aRadio,
                     B_Delete.toHTML   aDelete
                 ]
-
-
     in
         H.div []
             [

@@ -50,18 +50,18 @@ toHTML btn =
                 Just message -> [ HE.onClick message ]
                 Nothing      -> []
     in
-    H.button
-        (
-            [
-                B_Element.toHA B_Element.Button,
-                B_M_Color.toHA btn.color,
-                B_M_Size.toHA  btn.size
-            ]
-            ++ 
-            List.map (\state -> B_M_State.toHA state) btn.states
-            ++
-            btn.attributes
-            ++
-            onClick
-        )
-        ( icon ++ btn.content )
+        H.button
+            (
+                [
+                    B_Element.toHA B_Element.Button,
+                    B_M_Color.toHA btn.color,
+                    B_M_Size.toHA  btn.size
+                ]
+                ++ 
+                List.map (\state -> B_M_State.toHA state) btn.states
+                ++
+                btn.attributes
+                ++
+                onClick
+            )
+            ( icon ++ btn.content )

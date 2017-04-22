@@ -1,11 +1,7 @@
 module Bulma.Form.Input exposing (..)
 
 import Html            as H
-import Html.Attributes as HA
 import Html.Events     as HE
-
-import Bulma.Icon as B_Icon
-import Bulma.Help as B_Help
 
 import Bulma.Element as B_Element
 
@@ -15,7 +11,6 @@ import Bulma.Modifier.Icon    as B_M_Icon
 import Bulma.Modifier.Size    as B_M_Size
 
 import Maybe
-import String
 
 type alias Input msg = 
     {

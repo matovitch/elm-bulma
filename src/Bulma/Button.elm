@@ -1,7 +1,6 @@
 module Bulma.Button exposing (..)
 
-import Html            as H
-import Html.Attributes as HA
+import Html as H
 
 import Bulma.Control as B_Control exposing (control)
 import Bulma.Field   as B_Field   exposing (field)

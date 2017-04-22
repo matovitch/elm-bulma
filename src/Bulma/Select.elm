@@ -1,7 +1,6 @@
 module Bulma.Select exposing (..)
 
-import Html            as H
-import Html.Attributes as HA
+import Html as H
 
 import Bulma.Icon as B_Icon
 import Bulma.Help as B_Help

@@ -1,7 +1,6 @@
 module Bulma.Section exposing (..)
 
-import Html            as H
-import Html.Attributes as HA
+import Html as H
 
 import Bulma.Layout as B_Layout
 
@@ -22,7 +21,7 @@ toHTML : Section msg -> H.Html msg
 toHTML sct =
     H.div
         (
-            [ HA.class (B_Layout.toString B_Layout.Section) ]
+            [ B_Layout.toHA B_Layout.Section ]
             ++
             sct.attributes
         )

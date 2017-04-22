@@ -1,7 +1,6 @@
 module Bulma.Box exposing (..)
 
-import Html            as H
-import Html.Attributes as HA
+import Html as H
 
 import Bulma.Element as B_Element
 
@@ -21,5 +20,5 @@ box =
 toHTML : Box msg -> H.Html msg
 toHTML bx =
     H.div
-        [ HA.class (B_Element.toString B_Element.Box) ]
+        [ B_Element.toHA B_Element.Box ]
         bx.content

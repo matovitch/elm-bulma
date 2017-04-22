@@ -6,8 +6,11 @@ import Html.Attributes as HA
 import Bulma.Control as B_Control exposing (control)
 import Bulma.Field   as B_Field   exposing (field)
 
+import Maybe
+
 type alias Checkbox msg = 
     {
+        message    : Maybe msg,
         attributes : List (H.Attribute msg),
         content    : List (H.Html msg)
     }
@@ -15,20 +18,15 @@ type alias Checkbox msg =
 checkbox : Checkbox msg
 checkbox = 
     {
+        message      = Maybe.Nothing,
         attributes   = [],
         content      = []
     }
 
 toHTML : Checkbox msg -> H.Html msg
 toHTML ckb =
-    let
-        fCkb =
-            {
-                attributes   = ckb.attributes,
-                content      = ckb.content
-            }
-        
-        ctl = { control | element = B_Control.Checkbox fCkb }
+    let        
+        ctl = { control | element = B_Control.Checkbox ckb }
 
         fld = { field | controls = [ctl] }
     in
