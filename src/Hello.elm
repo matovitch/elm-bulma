@@ -25,15 +25,22 @@ import Bulma.Modifier.State as B_M_State
 import Bulma.Modifier.Size  as B_M_Size
 
 import Maybe
+import Dict
 
-type Message = 
-    Email String |
-    Send         |
-    Yes          |
-    No           |
+type CSMaster =
     Shannon      |
     Church       |
     Turing
+
+type YesOrNo =
+    Yes |
+    No
+
+type Message = 
+    SelectCSMaster CSMaster |
+    RadioYesOrNo YesOrNo    |
+    InputEmail String       |
+    ButtonSend                    
 
 main =
     let
@@ -50,7 +57,7 @@ main =
         sendButton = { button | color   = B_M_Color.Info,
                                 size    = B_M_Size.Large,
                                 icon    = Maybe.Just envelopeIcon,
-                                message = Maybe.Just Send,
+                                message = Maybe.Just ButtonSend,
                                 content = [ H.p [] [H.text "Send"] ] }
 
         someContent = 
@@ -95,14 +102,14 @@ main =
         anInput = { input | label      = "Email",
                             iconLeft   = Maybe.Just envelopeIcon,
                             help       = Maybe.Just anHelp,
-                            message    = Maybe.Just Email,
+                            message    = Maybe.Just InputEmail,
                             attributes = [ HA.placeholder "email" ] }
 
-        aSelect = { select | size       = B_M_Size.Large,
-                             label      = "CS Master",
-                             options    = [ ("Shannon", Shannon),
-                                            ("Church" , Church),
-                                            ("Turing" , Turing)] }
+        aSelect = { select | size    = B_M_Size.Large,
+                             label   = "CS Master",
+                             options = Dict.fromList [("Shannon", SelectCSMaster Shannon),
+                                                      ("Church" , SelectCSMaster Church),
+                                                      ("Turing" , SelectCSMaster Turing)] }
 
         aCheckbox = { checkbox | content = ([ H.text " A simple " ] ++ [H.a [] [H.text "checkbox..."]]) }
 
@@ -112,8 +119,8 @@ main =
         aRadio  = { radio | label = "Yes or No ?", 
                             name = "YesOrNo",
                             isHorizontal = True,
-                            contents =  [ ([ H.text " Yes" ], Yes), 
-                                          ([ H.text " No"  ], No) ] }
+                            contents =  [ ([ H.text " Yes" ], RadioYesOrNo Yes), 
+                                          ([ H.text " No"  ], RadioYesOrNo No) ] }
 
         aSection = 
             B_Section.Section []
