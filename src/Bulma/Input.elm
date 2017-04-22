@@ -27,6 +27,7 @@ type alias Input msg =
         label        : String,
         help         : Maybe (B_Help.Help msg),
         isHorizontal : Bool,
+        message      : Maybe (String -> msg),
         attributes   : List (H.Attribute msg)
     }
 
@@ -40,6 +41,7 @@ input =
         label        = "",
         help         = Maybe.Nothing,
         isHorizontal = False,
+        message      = Maybe.Nothing,
         attributes   = []
     }
 
@@ -51,6 +53,7 @@ toHTML inp =
                 state      = inp.state,
                 color      = inp.color,
                 size       = inp.size,
+                message    = inp.message,
                 attributes = inp.attributes
             }
 

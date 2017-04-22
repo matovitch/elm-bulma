@@ -26,6 +26,15 @@ import Bulma.Modifier.Size  as B_M_Size
 
 import Maybe
 
+type Message = 
+    Email String |
+    Send         |
+    Yes          |
+    No           |
+    Shannon      |
+    Church       |
+    Turing
+
 main =
     let
         envelopeIcon = { icon | name = "envelope" }
@@ -41,6 +50,7 @@ main =
         sendButton = { button | color   = B_M_Color.Info,
                                 size    = B_M_Size.Large,
                                 icon    = Maybe.Just envelopeIcon,
+                                message = Maybe.Just Send,
                                 content = [ H.p [] [H.text "Send"] ] }
 
         someContent = 
@@ -82,16 +92,17 @@ main =
         anHelp = { help | color   = B_M_Color.Success,
                           content = [ H.p [] [H.text "Is it helping ?"] ] }
 
-        anInput = { input | color      = B_M_Color.Success,
-                            size       = B_M_Size.Default,
-                            label      = "Email",
+        anInput = { input | label      = "Email",
                             iconLeft   = Maybe.Just envelopeIcon,
-                            help       = Maybe.Nothing,
+                            help       = Maybe.Just anHelp,
+                            message    = Maybe.Just Email,
                             attributes = [ HA.placeholder "email" ] }
 
         aSelect = { select | size       = B_M_Size.Large,
                              label      = "CS Master",
-                             options    = ["Church", "Shannon", "Turing"] }
+                             options    = [ ("Shannon", Shannon),
+                                            ("Church" , Church),
+                                            ("Turing" , Turing)] }
 
         aCheckbox = { checkbox | content = ([ H.text " A simple " ] ++ [H.a [] [H.text "checkbox..."]]) }
 
@@ -99,10 +110,10 @@ main =
 
 
         aRadio  = { radio | label = "Yes or No ?", 
-                            name = "YorN",
+                            name = "YesOrNo",
                             isHorizontal = True,
-                            contents =  [ [ H.text " Yes" ], 
-                                          [ H.text " No" ] ] }
+                            contents =  [ ([ H.text " Yes" ], Yes), 
+                                          ([ H.text " No"  ], No) ] }
 
         aSection = 
             B_Section.Section []

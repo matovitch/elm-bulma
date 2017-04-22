@@ -1,5 +1,8 @@
 module Bulma.Modifier.Columns exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Columns =
     Gapless   |
     Multiline |
@@ -13,3 +16,6 @@ toString columns =
         Multiline -> "is-multiline"
         Mobile    -> "is-mobile"
         Desktop   -> "is-desktop"
+
+toHA : Columns -> H.Attribute msg
+toHA = HA.class << toString

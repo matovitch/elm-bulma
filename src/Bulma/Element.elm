@@ -1,5 +1,8 @@
 module Bulma.Element exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Element =
     Box          |
     Button       |
@@ -45,3 +48,6 @@ toString element =
         Tag          -> "tag"
         Title        -> "title"
         Subtitle     -> "subtitle"
+
+toHA : Element -> H.Attribute msg
+toHA = HA.class << toString

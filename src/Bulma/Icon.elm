@@ -32,9 +32,9 @@ toHTML icn =
     H.span
         (
             [
-                HA.class (B_Element.toString B_Element.Icon),
-                HA.class (B_M_Icon.toString  icn.modifier  ),
-                HA.class (B_M_Size.toString  icn.size      )
+                B_Element.toHA B_Element.Icon,
+                B_M_Icon.toHA  icn.modifier,
+                B_M_Size.toHA  icn.size
             ] 
             ++ 
             icn.attributes

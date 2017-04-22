@@ -14,7 +14,7 @@ type alias Radio msg =
         name         : String,
         isHorizontal : Bool,
         attributes   : List (H.Attribute msg),
-        contents     : List (List (H.Html msg))
+        contents     : List (List (H.Html msg), msg)
     }
 
 radio : Radio msg
@@ -24,7 +24,7 @@ radio =
         name         = "",
         isHorizontal = False,
         attributes   = [],
-        contents     = [[]]
+        contents     = []
     }
 
 toHTML : Radio msg -> H.Html msg

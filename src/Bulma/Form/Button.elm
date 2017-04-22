@@ -1,16 +1,18 @@
-module Bulma.Button exposing (..)
+module Bulma.Form.Button exposing (..)
 
 import Html            as H
 import Html.Attributes as HA
+import Html.Events     as HE
 
-import Bulma.Control as B_Control exposing (control)
-import Bulma.Field   as B_Field   exposing (field)
+import Bulma.Element as B_Element
 
 import Bulma.Modifier.Color as B_M_Color
 import Bulma.Modifier.State as B_M_State
 import Bulma.Modifier.Size  as B_M_Size
 
 import Bulma.Icon as B_Icon
+
+import Maybe
 
 type alias Button msg =
     {
@@ -38,8 +40,28 @@ button =
 toHTML : Button msg -> H.Html msg
 toHTML btn =
     let
-        ctl = { control | element = B_Control.Button btn }
+        icon =
+            case btn.icon of
+                Maybe.Just icon -> [B_Icon.toHTML icon]
+                Maybe.Nothing   -> []
 
-        fld = { field | controls = [ctl] }
+        onClick =
+            case btn.message of
+                Just message -> [ HE.onClick message ]
+                Nothing      -> []
     in
-        B_Field.toHTML fld
+    H.button
+        (
+            [
+                B_Element.toHA B_Element.Button,
+                B_M_Color.toHA btn.color,
+                B_M_Size.toHA  btn.size
+            ]
+            ++ 
+            List.map (\state -> B_M_State.toHA state) btn.states
+            ++
+            btn.attributes
+            ++
+            onClick
+        )
+        ( icon ++ btn.content )

@@ -13,6 +13,8 @@ import Bulma.Modifier.Color   as B_M_Color
 import Bulma.Modifier.State   as B_M_State
 import Bulma.Modifier.Size    as B_M_Size
 
+import Json.Decode
+
 type alias Select msg = 
     {
         state        : B_M_State.State,
@@ -20,7 +22,7 @@ type alias Select msg =
         size         : B_M_Size.Size,
         label        : String,
         isHorizontal : Bool,
-        options      : List String,
+        options      : List (String, msg),
         attributes   : List (H.Attribute msg)
     }
 

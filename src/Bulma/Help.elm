@@ -27,8 +27,8 @@ toHTML hlp =
     H.p
         (
             [ 
-                HA.class (B_Element.toString B_Element.Help),
-                HA.class (B_M_Color.toString hlp.color) 
+                B_Element.toHA B_Element.Help,
+                B_M_Color.toHA hlp.color 
             ] 
             ++
             hlp.attributes

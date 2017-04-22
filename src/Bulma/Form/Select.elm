@@ -13,6 +13,9 @@ import Bulma.Modifier.Color   as B_M_Color
 import Bulma.Modifier.State   as B_M_State
 import Bulma.Modifier.Size    as B_M_Size
 
+import Json.Decode
+
+import Tuple
 import Maybe
 import List
 
@@ -21,7 +24,7 @@ type alias Select msg =
         state      : B_M_State.State,
         color      : B_M_Color.Color,
         size       : B_M_Size.Size,
-        options    : List String,
+        options    : List (String, msg),
         attributes : List (H.Attribute msg)
     }
 
@@ -42,11 +45,11 @@ toHTML slc =
         (
             [
                 HA.class (B_Element.toString B_Element.Select),
-                HA.class (B_M_Color.toString slc.color),
-                HA.class (B_M_State.toString slc.state),
-                HA.class (B_M_Size.toString  slc.size)
+                B_M_Color.toHA slc.color,
+                B_M_State.toHA slc.state,
+                B_M_Size.toHA  slc.size
             ]
             ++
             slc.attributes
         )
-        ( List.map (\t -> H.option [] [H.text t]) slc.options )
+        ( List.map (\t -> H.option [] [H.text (Tuple.first t)]) slc.options )

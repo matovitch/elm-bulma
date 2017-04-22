@@ -1,5 +1,8 @@
 module Bulma.Modifier.Icon exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Icon =
     Left    |
     Right   |
@@ -11,3 +14,6 @@ toString icon =
         Left    -> "is-left"
         Right   -> "is-right"
         Default -> ""
+
+toHA : Icon -> H.Attribute msg
+toHA = HA.class << toString

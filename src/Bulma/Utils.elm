@@ -1,6 +1,4 @@
-module Bulma.Utils.Maybe exposing (..)
-
-import Maybe
+module Bulma.Utils exposing (..)
 
 isNothing : Maybe a -> Bool
 isNothing maybe =
@@ -10,3 +8,10 @@ isNothing maybe =
 
 isJust : Maybe a -> Bool
 isJust = not << isNothing
+
+mapIfEnabled : (a -> b) -> Bool -> a  -> List b
+mapIfEnabled map isEnabled arg =
+    if isEnabled then
+        [ map arg ]
+    else
+        []

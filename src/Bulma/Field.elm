@@ -15,8 +15,6 @@ import Bulma.Modifier.Size  as B_M_Size
 import Bulma.Help as B_Help
 import Bulma.Icon as B_Icon
 
-import Bulma.Utils.Maybe as B_U_Maybe
-
 import String
 
 type alias Field msg =

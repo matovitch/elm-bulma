@@ -1,5 +1,8 @@
 module Bulma.Modifier.Color exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Color =
     Primary |
     Info    |
@@ -27,3 +30,6 @@ toString color =
             Dark    -> "is-dark"
             Link    -> "is-link"
             Default -> ""
+
+toHA : Color -> H.Attribute msg
+toHA = HA.class << toString

@@ -1,5 +1,8 @@
 module Bulma.Modifier.Control exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Control =
     IconsLeft  |
     IconsRight |
@@ -11,3 +14,6 @@ toString control =
         IconsLeft  -> "has-icons-left"
         IconsRight -> "has-icons-right"
         Expanded   -> "is-expanded"
+
+toHA : Control -> H.Attribute msg
+toHA = HA.class << toString
