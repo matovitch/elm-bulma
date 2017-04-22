@@ -4,27 +4,31 @@ import Html.Attributes as HA
 import Html.Events     as HE
 import Html            as H
 
-import Bulma.TabsItem as B_TabsItem exposing (tabsItem)
-import Bulma.Textarea as B_Textarea exposing (textarea)
-import Bulma.Checkbox as B_Checkbox exposing (checkbox)
-import Bulma.Content  as B_Content  exposing (content)
-import Bulma.Section  as B_Section  exposing (section)
-import Bulma.Buttons  as B_Buttons  exposing (buttons)
-import Bulma.Button   as B_Button   exposing (button)
-import Bulma.Delete   as B_Delete   exposing (delete)
-import Bulma.Select   as B_Select   exposing (select)
-import Bulma.Input    as B_Input    exposing (input)
-import Bulma.Radio    as B_Radio    exposing (radio)
-import Bulma.Help     as B_Help     exposing (help)
-import Bulma.Icon     as B_Icon     exposing (icon)
-import Bulma.Tabs     as B_Tabs     exposing (tabs)
-import Bulma.Box      as B_Box      exposing (box)
+import Bulma.Notification as B_Notification exposing (notification)
+import Bulma.TabsItem     as B_TabsItem     exposing (tabsItem)
+import Bulma.Textarea     as B_Textarea     exposing (textarea)
+import Bulma.Checkbox     as B_Checkbox     exposing (checkbox)
+import Bulma.Content      as B_Content      exposing (content)
+import Bulma.Section      as B_Section      exposing (section)
+import Bulma.Buttons      as B_Buttons      exposing (buttons)
+import Bulma.Button       as B_Button       exposing (button)
+import Bulma.Delete       as B_Delete       exposing (delete)
+import Bulma.Select       as B_Select       exposing (select)
+import Bulma.Image        as B_Image        exposing (image)
+import Bulma.Input        as B_Input        exposing (input)
+import Bulma.Radio        as B_Radio        exposing (radio)
+import Bulma.Help         as B_Help         exposing (help)
+import Bulma.Icon         as B_Icon         exposing (icon)
+import Bulma.Tabs         as B_Tabs         exposing (tabs)
+import Bulma.Box          as B_Box          exposing (box)
+import Bulma.Tag          as B_Tag          exposing (tag)
 
 
-import Bulma.Modifier.Color as B_M_Color
-import Bulma.Modifier.State as B_M_State
-import Bulma.Modifier.Size  as B_M_Size
-import Bulma.Modifier.Tabs  as B_M_Tabs 
+import Bulma.Modifier.Image  as B_M_Image 
+import Bulma.Modifier.Color  as B_M_Color
+import Bulma.Modifier.State  as B_M_State
+import Bulma.Modifier.Size   as B_M_Size
+import Bulma.Modifier.Tabs   as B_M_Tabs 
 
 import Maybe
 import Dict
@@ -62,7 +66,7 @@ main =
                            modifiers = [ B_M_Tabs.Centered ],
                            size      = B_M_Size.Large }
 
-        sendButton = { button | color      = B_M_Color.Info,
+        sendButton = { button | color      = B_M_Color.Success,
                                 size       = B_M_Size.Medium,
                                 icon       = Maybe.Just envelopeIcon,
                                 attributes = [ HE.onClick ButtonSend ],
@@ -109,8 +113,11 @@ main =
                 ]
 
         aComment = { textarea | label = "Comment",
-                                message    = Maybe.Just TextareaComment,
-                                attributes = [ HA.placeholder "Something to say ?" ] }
+                                attributes = [ HA.placeholder "Something to say ?",
+                                               HE.onInput TextareaComment ] }
+
+        aNotif = { notification | color   = B_M_Color.Info,
+                                  message = "Have you seen this amazing info notif ?" }
 
         sendBox = { box | content = [ B_Content.toHTML someContent, 
                                       B_Textarea.toHTML aComment, 
@@ -134,24 +141,29 @@ main =
         aCheckbox = { checkbox | content = ([ H.text " A simple " ] ++ [H.a [] [H.text "checkbox..."]]), 
                                  attributes = [ HE.onClick Checkbox ] }
 
-        aDelete = { delete | size = B_M_Size.Large }
-
-
         aRadio  = { radio | label = "Yes or No ?", 
                             name = "YesOrNo",
                             isHorizontal = True,
                             contents =  [ ([ H.text " Yes" ], RadioYesOrNo Yes), 
                                           ([ H.text " No"  ], RadioYesOrNo No) ] }
 
+        anImage = { image | format     = Just B_M_Image.Is48x48,
+                            attributes = [ HA.src "bauda.svg" ] }
+
+        aTag = { tag | color   = B_M_Color.Danger,
+                       message = "red tag"  }
+
         aSection = 
             B_Section.Section []
                 [
-                    B_Box.toHTML      sendBox,
-                    B_Input.toHTML    anInput,
-                    B_Select.toHTML   aSelect,
-                    B_Checkbox.toHTML aCheckbox,
-                    B_Radio.toHTML    aRadio,
-                    B_Delete.toHTML   aDelete
+                    B_Notification.toHTML aNotif,
+                    B_Box.toHTML          sendBox,
+                    B_Input.toHTML        anInput,
+                    B_Select.toHTML       aSelect,
+                    B_Checkbox.toHTML     aCheckbox,
+                    B_Radio.toHTML        aRadio,
+                    B_Image.toHTML        anImage,
+                    B_Tag.toHTML          aTag
                 ]
     in
         H.div []

@@ -6,8 +6,6 @@ import Html.Attributes as HA
 import Bulma.Control as B_Control exposing (control)
 import Bulma.Field   as B_Field   exposing (field)
 
-import Maybe
-
 type alias Checkbox msg = 
     {
         attributes : List (H.Attribute msg),

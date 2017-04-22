@@ -17,7 +17,6 @@ type alias Textarea msg =
         state      : B_M_State.State,
         color      : B_M_Color.Color,
         size       : B_M_Size.Size,
-        message    : Maybe (String -> msg),
         attributes : List (H.Attribute msg)
     }
 
@@ -27,18 +26,11 @@ textarea =
         state      = B_M_State.Default,
         color      = B_M_Color.Default,
         size       = B_M_Size.Default,
-        message    = Maybe.Nothing,
         attributes = []
     }
 
 toHTML : Textarea msg -> H.Html msg
 toHTML txa =
-    let
-        onInput =
-            case txa.message of
-                Just message -> [ HE.onInput message ]
-                Nothing      -> []
-    in
     H.textarea
         (
             [
@@ -49,7 +41,5 @@ toHTML txa =
             ]
             ++
             txa.attributes
-            ++
-            onInput
         )
         []

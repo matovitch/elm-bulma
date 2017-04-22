@@ -23,7 +23,6 @@ type alias Textarea msg =
         label        : String,
         help         : Maybe (B_Help.Help msg),
         isHorizontal : Bool,
-        message      : Maybe (String -> msg),
         attributes   : List (H.Attribute msg)
     }
 
@@ -33,9 +32,8 @@ textarea =
         color        = B_M_Color.Default,
         size         = B_M_Size.Normal,
         label        = "",
-        help         = Maybe.Nothing,
+        help         = Nothing,
         isHorizontal = False,
-        message      = Maybe.Nothing,
         attributes   = []
     }
 
@@ -47,7 +45,6 @@ toHTML txa =
                 state      = txa.state,
                 color      = txa.color,
                 size       = txa.size,
-                message    = txa.message,
                 attributes = txa.attributes
             }
 
