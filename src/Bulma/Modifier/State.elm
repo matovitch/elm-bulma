@@ -25,7 +25,6 @@ toString state =
         Disabled -> ""
         Default  -> ""
 
-
 toHA : State -> H.Attribute msg
 toHA state =
     case state of

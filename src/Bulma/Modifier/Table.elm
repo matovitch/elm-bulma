@@ -1,5 +1,8 @@
 module Bulma.Modifier.Table exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Table =
     Bordered |
     Striped  |
@@ -11,3 +14,6 @@ toString table =
         Bordered -> "is-bordered"
         Striped  -> "is-striped"
         Narrow   -> "is-narrow"
+
+toHA : Table -> H.Attribute msg
+toHA = HA.class << toString

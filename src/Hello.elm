@@ -8,6 +8,7 @@ import Bulma.Notification as B_Notification exposing (notification)
 import Bulma.TabsItem     as B_TabsItem     exposing (tabsItem)
 import Bulma.Textarea     as B_Textarea     exposing (textarea)
 import Bulma.Checkbox     as B_Checkbox     exposing (checkbox)
+import Bulma.Subtitle     as B_Subtitle     exposing (subtitle)
 import Bulma.Content      as B_Content      exposing (content)
 import Bulma.Section      as B_Section      exposing (section)
 import Bulma.Buttons      as B_Buttons      exposing (buttons)
@@ -17,21 +18,25 @@ import Bulma.Select       as B_Select       exposing (select)
 import Bulma.Image        as B_Image        exposing (image)
 import Bulma.Input        as B_Input        exposing (input)
 import Bulma.Radio        as B_Radio        exposing (radio)
+import Bulma.Table        as B_Table        exposing (table)
+import Bulma.Title        as B_Title        exposing (title)
 import Bulma.Help         as B_Help         exposing (help)
 import Bulma.Icon         as B_Icon         exposing (icon)
 import Bulma.Tabs         as B_Tabs         exposing (tabs)
 import Bulma.Box          as B_Box          exposing (box)
 import Bulma.Tag          as B_Tag          exposing (tag)
 
-
 import Bulma.Modifier.Image  as B_M_Image 
 import Bulma.Modifier.Color  as B_M_Color
 import Bulma.Modifier.State  as B_M_State
+import Bulma.Modifier.Table  as B_M_Table
+import Bulma.Modifier.Title  as B_M_Title
 import Bulma.Modifier.Size   as B_M_Size
-import Bulma.Modifier.Tabs   as B_M_Tabs 
+import Bulma.Modifier.Tabs   as B_M_Tabs
 
 import Maybe
 import Dict
+
 
 type CSMaster =
     Shannon      |
@@ -86,30 +91,33 @@ main =
                         [
                             H.text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis."
                         ],
-                    H.table []
-                        [ H.thead []
-                            [ H.tr []
-                                [ H.th []
-                                    [ H.text "One" ]
-                                , H.th []
-                                    [ H.text "Two" ]
+                    B_Table.toHTML
+                        (
+                            B_Table.Table [ B_M_Table.Narrow, B_M_Table.Bordered ] []
+                                [ H.thead []
+                                    [ H.tr []
+                                        [ H.th []
+                                            [ H.text "One" ]
+                                        , H.th []
+                                            [ H.text "Two" ]
+                                        ]
+                                    ]
+                                , H.tbody []
+                                    [ H.tr []
+                                        [ H.td []
+                                            [ H.text "Three" ]
+                                        , H.td []
+                                            [ H.text "Four" ]
+                                        ]
+                                    , H.tr []
+                                        [ H.td []
+                                            [ H.text "Five" ]
+                                        , H.td []
+                                            [ H.text "Six" ]
+                                        ]
+                                    ]
                                 ]
-                            ]
-                        , H.tbody []
-                            [ H.tr []
-                                [ H.td []
-                                    [ H.text "Three" ]
-                                , H.td []
-                                    [ H.text "Four" ]
-                                ]
-                            , H.tr []
-                                [ H.td []
-                                    [ H.text "Five" ]
-                                , H.td []
-                                    [ H.text "Six" ]
-                                ]
-                            ]
-                        ]
+                        )
                 ]
 
         aComment = { textarea | label = "Comment",
@@ -119,10 +127,6 @@ main =
         aNotif = { notification | color   = B_M_Color.Info,
                                   message = "Have you seen this amazing info notif ?" }
 
-        sendBox = { box | content = [ B_Content.toHTML someContent, 
-                                      B_Textarea.toHTML aComment, 
-                                      B_Buttons.toHTML [sendButton, cancelButton] ] }
-
         anHelp = { help | color   = B_M_Color.Success,
                           content = [ H.p [] [H.text "Is it helping ?"] ] }
 
@@ -131,6 +135,10 @@ main =
                             help       = Maybe.Just anHelp,
                             attributes = [ HE.onInput InputEmail,
                                            HA.placeholder "email" ] }
+
+        sendBox = { box | content = [ B_Content.toHTML someContent, 
+                                      B_Textarea.toHTML aComment,
+                                      B_Buttons.toHTML [sendButton, cancelButton] ] }
 
         aSelect = { select | size    = B_M_Size.Large,
                              label   = "CS Master",
@@ -143,15 +151,21 @@ main =
 
         aRadio  = { radio | label = "Yes or No ?", 
                             name = "YesOrNo",
-                            isHorizontal = True,
+                            isHorizontal = False,
                             contents =  [ ([ H.text " Yes" ], RadioYesOrNo Yes), 
                                           ([ H.text " No"  ], RadioYesOrNo No) ] }
 
-        anImage = { image | format     = Just B_M_Image.Is48x48,
+        anImage = { image | format     = Just B_M_Image.Is128x128,
                             attributes = [ HA.src "bauda.svg" ] }
 
         aTag = { tag | color   = B_M_Color.Danger,
                        message = "red tag"  }
+
+        aTitle = { title | kind = B_M_Title.Is2, 
+                           name = "Title 2" }
+
+        aSubtitle = { subtitle | kind = B_M_Title.Is2, 
+                                 name = "Subtitle 2" }
 
         aSection = 
             B_Section.Section []
@@ -163,7 +177,9 @@ main =
                     B_Checkbox.toHTML     aCheckbox,
                     B_Radio.toHTML        aRadio,
                     B_Image.toHTML        anImage,
-                    B_Tag.toHTML          aTag
+                    B_Tag.toHTML          aTag,
+                    B_Title.toHTML        aTitle,
+                    B_Subtitle.toHTML     aSubtitle
                 ]
     in
         H.div []

@@ -1,5 +1,8 @@
 module Bulma.Modifier.Title exposing (..)
 
+import Html            as H
+import Html.Attributes as HA
+
 type Title =
     Is1 |
     Is2 |
@@ -18,3 +21,5 @@ toString title =
         Is5 -> "is-5"
         Is6 -> "is-6"
 
+toHA : Title -> H.Attribute msg
+toHA = HA.class << toString
